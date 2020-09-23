@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sampler</title>
+    <script type="text/javascript" src="js/nexusUI.js"></script>
+    <script type="text/javascript" src="js/Tone.js"></script>
+    <script>
+      var sampler = new Tone.Player(
+        'https://freesound.org/data/previews/113/113287_4948-lq.mp3',
+        function() {
+          console.log('samples loaded');
+        }
+      );
+    </script>
+  </head>
+  <body style="background: #789;">
+    <a href="index.html">Index</a>
+    <br />
+    <br />
+    Sampler
+  </body>
+</html>

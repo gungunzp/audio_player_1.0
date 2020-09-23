@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sampler</title>
+    <script type="text/javascript" src="js/nexusUI.js"></script>
+    <script type="text/javascript" src="js/Tone.js"></script>
+    <script>
+      //   const feedbackDelay = new Tone.FeedbackDelay('8n', 0.5).toDestination();
+      //   const tom = new Tone.MembraneSynth({
+      //     octaves: 4,
+      //     pitchDecay: 0.1
+      //   }).connect(feedbackDelay);
+      //   tom.triggerAttackRelease('A2', '32n');
+
+      var delay = new Tone.FeedbackDelay('16n', 0.5).toMaster();
+      var sampler = new Tone.Player(
+        'https://freesound.org/data/previews/113/113287_4948-lq.mp3',
+        function() {
+          console.log('samples loaded');
+        }
+      );
+      sampler.retrigger = true;
+      //   sampler.retrigger = false;
+      sampler.connect(delay);
+      // sampler.play('0')
+
+      // }
+
+      nx.onload = function() {
+        //
+        document.body.onkeyup = function(e) {
+          if (e.keyCode == 32) {
+            console.log(e);
+            sampler.start();
+          }
+        };
+
+        button1.on('*', function(data) {
+          if (data.press == 1) {
+            console.log(data);
+            sampler.start();
+          }
+          // sampler.stop('+0.7');
+        });
+
+        dial1.on('*', function(data) {
+          delay.delayTime.value = data.value;
+        });
+        dial2.on('*', function(data) {
+          delay.feedback.value = data.value;
+        });
+        dial3.on('*', function(data) {
+          sampler.playbackRate = data.value;
+        });
+      };
+    </script>
+  </head>
+
+  <body style="background-color:#ddd">
+    <a href="index.html">Index</a>
+    <br />
+    <br />
+    Sampler 1
+    <canvas nx="button"></canvas>
+    <canvas nx="dial"></canvas>
+    <canvas nx="dial"></canvas>
+    <canvas nx="dial"></canvas>
+  </body>
+</html>

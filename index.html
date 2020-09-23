@@ -4,6 +4,67 @@
     <meta charset="utf‐8" />
     <title>Hello web audio</title>
   </head>
-  <body></body>
-  <script></script>
+  <body style="background: #678;">
+    <a href="sampler.html">Sampler</a>
+    <br />
+    <br />
+    <a href="sampler_1.html">Sampler 1</a>
+    <br />
+    <br />
+    <button id="play">Play</button>
+    <button id="stop">Stop</button>
+  </body>
+  <script>
+    window.onload = function() {
+      //create the context for the web audio
+      var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+      // we create the gain module, named as volume, and connect it to our
+      var volume = audioCtx.createGain();
+      volume.connect(audioCtx.destination);
+
+      var sine = audioCtx.createOscillator();
+
+      //create, tune, start and connect each oscillator sinea, sineb and sinec
+      var sinea = audioCtx.createOscillator();
+      sinea.frequency.value = 440;
+      sinea.type = 'sine';
+
+      var sineb = audioCtx.createOscillator();
+      sineb.frequency.value = 523.25;
+      sineb.type = 'sine';
+
+      var sinec = audioCtx.createOscillator();
+      sinec.frequency.value = 698.46;
+      sinec.type = 'sine';
+
+      document.getElementById('play').addEventListener('click', function() {
+        sine.start();
+        sine.connect(volume);
+
+        // sinea.start();
+        // sinea.connect(audioCtx.destination);
+
+        // sineb.start();
+        // sineb.connect(audioCtx.destination);
+
+        // sinec.start();
+        // sinec.connect(audioCtx.destination);
+      });
+
+      document.getElementById('stop').addEventListener('click', function() {
+        sine.stop();
+        sine.connect(volume);
+
+        // sinea.stop();
+        // sinea.connect(audioCtx.destination);
+
+        // sineb.stop();
+        // sineb.connect(audioCtx.destination);
+
+        // sinec.stop();
+        // sinec.connect(audioCtx.destination);
+      });
+    };
+  </script>
 </html>
